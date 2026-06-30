@@ -136,6 +136,7 @@
   .lb-name { font-size: 13.5px; font-weight: 600; }
   .lb-caption { font-size: 12px; color: #9c9a94; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .lb-likes { font-size: 13px; font-weight: 700; color: #ff5e62; flex-shrink: 0; }
+  .load-more-row { display: flex; justify-content: center; margin-top: 24px; }
   .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
@@ -309,7 +310,7 @@
 
   <div class="meta-row">
     <span><span class="status-dot"></span>Live shared gallery</span>
-    <span id="countdown">New meme auto-generates every 10 min</span>
+    <span id="countdown">New meme auto-generates every 5 min</span>
   </div>
 
   <div class="motd-section" id="motd-section"></div>
@@ -328,6 +329,10 @@
 
   <div class="gallery" id="gallery">
     <p class="empty" id="empty-msg">No memes yet. Click "Generate now" to create the first one.</p>
+  </div>
+
+  <div class="load-more-row">
+    <button id="load-more-btn" class="btn-secondary" style="display:none;">Load more</button>
   </div>
 
   <footer>
@@ -1098,13 +1103,44 @@ function supabaseHeaders() {
   };
 }
 
-async function fetchMemes() {
+async function fetchMemes(offset) {
+  offset = offset || 0;
   const res = await fetch(
-    SUPABASE_URL + "/rest/v1/memes?select=*&order=created_at.desc&limit=60",
+    SUPABASE_URL + "/rest/v1/memes?select=*&order=created_at.desc&limit=60&offset=" + offset,
     { headers: supabaseHeaders() }
   );
   if (!res.ok) throw new Error("Failed to fetch memes: " + res.status);
   return res.json();
+}
+
+async function fetchTotalMemeCount() {
+  const res = await fetch(
+    SUPABASE_URL + "/rest/v1/memes?select=id&limit=1",
+    { headers: { ...supabaseHeaders(), "Prefer": "count=exact" } }
+  );
+  if (!res.ok) throw new Error("Failed to fetch meme count: " + res.status);
+  const range = res.headers.get("content-range");
+  if (range && range.includes("/")) {
+    const total = range.split("/")[1];
+    return total === "*" ? 0 : parseInt(total, 10);
+  }
+  return 0;
+}
+
+async function fetchTodayMemeCount() {
+  const startOfToday = new Date();
+  startOfToday.setHours(0, 0, 0, 0);
+  const res = await fetch(
+    SUPABASE_URL + "/rest/v1/memes?select=id&created_at=gte." + startOfToday.toISOString() + "&limit=1",
+    { headers: { ...supabaseHeaders(), "Prefer": "count=exact" } }
+  );
+  if (!res.ok) throw new Error("Failed to fetch today's meme count: " + res.status);
+  const range = res.headers.get("content-range");
+  if (range && range.includes("/")) {
+    const total = range.split("/")[1];
+    return total === "*" ? 0 : parseInt(total, 10);
+  }
+  return 0;
 }
 
 async function fetchTopMemes(period) {
@@ -1119,13 +1155,13 @@ async function fetchTopMemes(period) {
 }
 
 async function likeMeme(memeId, currentLikes) {
-  const res = await fetch(SUPABASE_URL + "/rest/v1/memes?id=eq." + memeId, {
-    method: "PATCH",
-    headers: { ...supabaseHeaders(), "Prefer": "return=representation" },
-    body: JSON.stringify({ likes: currentLikes + 1 })
+  const res = await fetch(SUPABASE_URL + "/rest/v1/rpc/increment_likes", {
+    method: "POST",
+    headers: supabaseHeaders(),
+    body: JSON.stringify({ meme_id_input: memeId })
   });
   if (!res.ok) throw new Error("Failed to like meme: " + res.status);
-  return res.json();
+  return { likes: currentLikes + 1 };
 }
 
 async function fetchComments(memeId) {
@@ -1227,20 +1263,20 @@ const PASTELS = [
   "#ffe3df", "#fff0d9", "#e3f3e6", "#e0eefc", "#f3e3fa", "#ffe6f0", "#e3faf6"
 ];
 
-function updateStats(memes) {
-  document.getElementById("stat-total").textContent = memes.length;
-  const today = new Date().toDateString();
-  const todayCount = memes.filter((m) => new Date(m.created_at).toDateString() === today).length;
-  document.getElementById("stat-today").textContent = todayCount;
+function updateStats(memes, totalCount, todayCount) {
+  document.getElementById("stat-total").textContent = (totalCount || memes.length).toLocaleString();
+  const fallbackToday = new Date().toDateString();
+  const fallbackTodayCount = memes.filter((m) => new Date(m.created_at).toDateString() === fallbackToday).length;
+  document.getElementById("stat-today").textContent = (todayCount !== undefined ? todayCount : fallbackTodayCount).toLocaleString();
   const totalLikes = memes.reduce((sum, m) => sum + (m.likes || 0), 0);
   document.getElementById("stat-likes").textContent = totalLikes.toLocaleString();
 }
 
-function renderGallery(memes) {
+function renderGallery(memes, totalCount, todayCount) {
   const gallery = document.getElementById("gallery");
   const emptyMsg = document.getElementById("empty-msg");
   gallery.innerHTML = "";
-  updateStats(memes || []);
+  updateStats(memes || [], totalCount, todayCount);
 
   if (!memes || memes.length === 0) {
     gallery.appendChild(emptyMsg);
@@ -1489,15 +1525,52 @@ function attachImageWithRetry(img, overlay, meme, attempt) {
   img.src = meme.image_url;
 }
 
+let loadedMemes = [];
+let totalMemeCount = 0;
+let todayMemeCountCache = 0;
+
 async function refreshGallery() {
   try {
-    const memes = await fetchMemes();
-    renderGallery(memes);
-    renderMemeOfTheDay(memes);
+    const [memes, totalCount, todayCount] = await Promise.all([
+      fetchMemes(0),
+      fetchTotalMemeCount().catch(() => 0),
+      fetchTodayMemeCount().catch(() => 0)
+    ]);
+    loadedMemes = memes;
+    totalMemeCount = totalCount;
+    todayMemeCountCache = todayCount;
+    renderGallery(loadedMemes, totalMemeCount, todayCount);
+    renderMemeOfTheDay(loadedMemes);
+    updateLoadMoreVisibility();
   } catch (e) {
     console.error(e);
   }
 }
+
+async function loadMoreMemes() {
+  const btn = document.getElementById("load-more-btn");
+  btn.disabled = true;
+  const originalText = btn.textContent;
+  btn.textContent = "Loading...";
+  try {
+    const more = await fetchMemes(loadedMemes.length);
+    loadedMemes = loadedMemes.concat(more);
+    renderGallery(loadedMemes, totalMemeCount, todayMemeCountCache);
+    updateLoadMoreVisibility();
+  } catch (e) {
+    console.error(e);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = originalText;
+  }
+}
+
+function updateLoadMoreVisibility() {
+  const btn = document.getElementById("load-more-btn");
+  btn.style.display = loadedMemes.length < totalMemeCount ? "inline-flex" : "none";
+}
+
+document.getElementById("load-more-btn").addEventListener("click", loadMoreMemes);
 
 function renderMemeOfTheDay(memes) {
   const container = document.getElementById("motd-section");
@@ -1566,11 +1639,23 @@ document.querySelectorAll(".lb-tab").forEach((tab) => {
   });
 });
 
+let isGenerating = false;
+
+function setGenerateButtonsDisabled(disabled) {
+  ["generate-absurd-btn", "generate-cute-btn", "generate-degen-btn"].forEach((id) => {
+    const b = document.getElementById(id);
+    if (b) b.disabled = disabled;
+  });
+}
+
 async function generateOneMeme(mode, triggerBtn) {
+  if (isGenerating) return;
+  isGenerating = true;
+
   mode = mode || "absurd";
   const btn = triggerBtn || document.getElementById("generate-absurd-btn");
   const originalLabel = btn.innerHTML;
-  btn.disabled = true;
+  setGenerateButtonsDisabled(true);
   btn.innerHTML = "Generating...";
 
   try {
@@ -1593,10 +1678,11 @@ async function generateOneMeme(mode, triggerBtn) {
     await refreshGallery();
   } catch (e) {
     console.error(e);
-    alert("Something went wrong generating the meme. Check the console for details.");
+    alert("Something went wrong generating the meme. This can happen if the image service is busy — try again in a moment.");
   } finally {
-    btn.disabled = false;
+    setGenerateButtonsDisabled(false);
     btn.innerHTML = originalLabel;
+    isGenerating = false;
   }
 }
 
@@ -1605,9 +1691,11 @@ document.getElementById("generate-cute-btn").addEventListener("click", (e) => ge
 document.getElementById("generate-degen-btn").addEventListener("click", (e) => generateOneMeme("degen", e.currentTarget));
 document.getElementById("refresh-btn").addEventListener("click", refreshGallery);
 
-const INTERVAL_MS = 10 * 60 * 1000;
+const INTERVAL_MS = 5 * 60 * 1000;
 setInterval(generateOneMeme, INTERVAL_MS);
-setInterval(refreshGallery, 30000);
+setInterval(() => {
+  if (loadedMemes.length <= 60) refreshGallery();
+}, 30000);
 
 refreshGallery();
 trackVisit();
