@@ -79,6 +79,13 @@
   }
   .btn-cute:hover { box-shadow: 0 8px 26px rgba(201,166,247,0.45); transform: translateY(-1px); }
   .btn-cute:disabled { opacity: 0.55; cursor: default; box-shadow: none; transform: none; }
+  .btn-degen {
+    background: linear-gradient(135deg, #2ecc71, #f1c40f);
+    color: #1a3a1a;
+    box-shadow: 0 6px 20px rgba(46,204,113,0.32);
+  }
+  .btn-degen:hover { box-shadow: 0 8px 26px rgba(46,204,113,0.42); transform: translateY(-1px); }
+  .btn-degen:disabled { opacity: 0.55; cursor: default; box-shadow: none; transform: none; }
   .btn-secondary {
     background: white; color: #333; border: 1.5px solid #e6e3db !important;
   }
@@ -93,6 +100,42 @@
     display: inline-block; margin-right: 6px;
     box-shadow: 0 0 0 3px rgba(76,175,80,0.18);
   }
+  .motd-section { margin-bottom: 24px; }
+  .motd-card {
+    display: flex; gap: 18px; background: white; border-radius: 18px;
+    border: 2px solid #ffd966; padding: 16px; align-items: center;
+    box-shadow: 0 4px 16px rgba(255,217,102,0.25);
+  }
+  .motd-img { width: 110px; height: 110px; border-radius: 12px; object-fit: cover; flex-shrink: 0; background: #f0eee7; }
+  .motd-label {
+    font-size: 11px; font-weight: 700; color: #b8860b; text-transform: uppercase;
+    letter-spacing: 0.5px; margin-bottom: 4px;
+  }
+  .motd-name { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 16px; margin-bottom: 2px; }
+  .motd-caption { font-size: 13.5px; color: #6b6b6b; }
+  .leaderboard-toggle-row { display: flex; justify-content: center; margin-bottom: 12px; }
+  .leaderboard-section { display: none; margin-bottom: 28px; }
+  .leaderboard-section.open { display: block; }
+  .leaderboard-tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 14px; }
+  .lb-tab {
+    padding: 7px 16px; border-radius: 999px; border: 1.5px solid #e6e3db;
+    background: white; font-size: 13px; font-weight: 600; color: #9c9a94;
+    cursor: pointer; font-family: 'Inter', sans-serif;
+  }
+  .lb-tab.active { background: #1a1a1a; color: white; border-color: #1a1a1a; }
+  .leaderboard-list {
+    display: flex; flex-direction: column; gap: 8px; max-width: 560px; margin: 0 auto;
+  }
+  .lb-row {
+    display: flex; align-items: center; gap: 12px; background: white;
+    border: 1px solid #ece9e1; border-radius: 12px; padding: 8px 14px;
+  }
+  .lb-rank { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 15px; color: #b8b5ab; width: 22px; }
+  .lb-img { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; flex-shrink: 0; background: #f0eee7; }
+  .lb-info { flex: 1; min-width: 0; }
+  .lb-name { font-size: 13.5px; font-weight: 600; }
+  .lb-caption { font-size: 12px; color: #9c9a94; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .lb-likes { font-size: 13px; font-weight: 700; color: #ff5e62; flex-shrink: 0; }
   .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
@@ -116,8 +159,12 @@
   .meme-card .img-wrap { position: relative; aspect-ratio: 1/1; overflow: hidden; }
   .meme-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .meme-card .caption {
-    padding: 14px 16px; font-size: 14.5px; font-weight: 500; text-align: center;
+    padding: 14px 16px 6px; font-size: 14.5px; font-weight: 500; text-align: center;
     line-height: 1.45; color: #2a2a2a; font-family: 'Outfit', sans-serif;
+  }
+  .meme-name {
+    display: inline-block; font-size: 12px; font-weight: 700; color: #ff5e62;
+    text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 3px;
   }
   .new-badge {
     position: absolute; top: 12px; left: 12px; z-index: 2;
@@ -155,6 +202,10 @@
   footer { text-align: center; margin-top: 56px; font-size: 12.5px; color: #b8b5ab; }
   footer a { color: #9c9a94; }
   .visitor-count { margin-top: 6px; font-weight: 600; color: #9c9a94; }
+  .disclaimer {
+    max-width: 480px; margin: 16px auto 0; font-size: 11px; line-height: 1.5;
+    color: #b8b5ab; padding: 10px 14px; border: 1px solid #ece9e1; border-radius: 10px;
+  }
   .card-actions {
     display: flex; align-items: center; justify-content: space-between;
     padding: 0 16px 14px;
@@ -175,6 +226,15 @@
     font-size: 13px; font-weight: 600; color: #9c9a94; padding: 4px 8px;
   }
   .comment-toggle:hover { color: #555; }
+  .share-menu {
+    display: none; flex-direction: column; gap: 6px; padding: 0 16px 12px;
+  }
+  .share-menu.open { display: flex; }
+  .share-menu a {
+    font-size: 12.5px; font-weight: 600; color: #ff5e62; text-decoration: none;
+    background: #fff0ee; padding: 6px 10px; border-radius: 8px; text-align: center;
+  }
+  .share-menu a:hover { background: #ffe1dc; }
   .comments-section { padding: 0 16px 16px; display: none; }
   .comments-section.open { display: block; }
   .comments-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
@@ -218,6 +278,10 @@
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
       Generate cute
     </button>
+    <button id="generate-degen-btn" class="btn-degen">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17l4-9 4 9M6.5 14h5M14 17V8l5 4-5 4"/></svg>
+      Generate degen
+    </button>
     <button id="refresh-btn" class="btn-secondary">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-2.6-6.36"/><path d="M21 4v5h-5"/></svg>
       Refresh
@@ -233,11 +297,33 @@
       <div class="stat-num" id="stat-today">0</div>
       <div class="stat-label">today</div>
     </div>
+    <div class="stat">
+      <div class="stat-num" id="stat-likes">0</div>
+      <div class="stat-label">total likes</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" id="stat-streak">0</div>
+      <div class="stat-label">your streak 🔥</div>
+    </div>
   </div>
 
   <div class="meta-row">
     <span><span class="status-dot"></span>Live shared gallery</span>
     <span id="countdown">New meme auto-generates every 10 min</span>
+  </div>
+
+  <div class="motd-section" id="motd-section"></div>
+
+  <div class="leaderboard-toggle-row">
+    <button id="leaderboard-toggle" class="btn-secondary">🏆 Leaderboard</button>
+  </div>
+
+  <div class="leaderboard-section" id="leaderboard-section">
+    <div class="leaderboard-tabs">
+      <button class="lb-tab active" data-period="week">This week</button>
+      <button class="lb-tab" data-period="all">All time</button>
+    </div>
+    <div class="leaderboard-list" id="leaderboard-list"></div>
   </div>
 
   <div class="gallery" id="gallery">
@@ -247,6 +333,10 @@
   <footer>
     Open source · Free forever · Images via Pollinations.ai
     <div class="visitor-count" id="visitor-count"></div>
+    <div class="disclaimer">
+      This site does not create, endorse, sell, or have any affiliation with any cryptocurrency token.
+      Any token claiming to be "official" or "linked" to this site is fraudulent and unauthorized — we have no token, and we never will.
+    </div>
   </footer>
 </div>
 
@@ -267,7 +357,14 @@ const ANIMALS = [
   "a sea lion", "a toucan", "a bison", "an emu", "a hippo",
   "a moose", "a beaver", "a squid", "a goose", "a turkey",
   "a frog", "a gecko", "a parrot", "a snail", "a crab",
-  "a jellyfish", "a seahorse", "a manatee", "an axolotl", "a quokka"
+  "a jellyfish", "a seahorse", "a manatee", "an axolotl", "a quokka",
+  "a hyena", "a baboon", "a stork", "a heron", "a swan",
+  "a ram", "a yak", "a buffalo", "a mongoose", "a vulture",
+  "a pangolin", "a tarsier", "a lemur", "a fennec fox", "an aardvark",
+  "a kiwi bird", "a puffin", "a bat", "a hare", "a fox",
+  "a possum", "a newt", "a salamander", "a cuttlefish", "a lobster",
+  "a starfish", "a clam", "a beetle", "a praying mantis", "a butterfly",
+  "a dragonfly", "a chipmunk", "a squirrel", "a ground squirrel", "a marmot"
 ];
 
 const INVENTED_CHARACTERS = [
@@ -286,7 +383,22 @@ const INVENTED_CHARACTERS = [
   "a viking who forgot his sword at home", "a mad scientist hamster",
   "an old sailor with a wooden leg made of chocolate",
   "a sentient houseplant with tiny legs", "a baker who is secretly a dragon",
-  "a sentient traffic cone with a personality", "a tiny gnome operating heavy machinery"
+  "a sentient traffic cone with a personality", "a tiny gnome operating heavy machinery",
+  "a sleepy owl wizard's apprentice", "a tiny dragon working as a barista",
+  "a knight whose armor is made of bubble wrap", "a sentient stack of books with legs",
+  "a time-traveling tortoise in a tiny lab coat", "a goblin accountant with a tiny calculator",
+  "a sentient garden hose with a mischievous grin", "a retired pirate parrot with an eyepatch",
+  "a snow leopard in a tiny detective coat", "a sentient grandfather clock with arms",
+  "a fairy who specializes in fixing broken umbrellas", "a yeti who runs a small bakery",
+  "a sentient kite with a determined expression", "a centaur who delivers mail",
+  "a tiny troll who collects bottle caps", "a sentient pinwheel spinning with joy",
+  "a wandering bard mouse with a tiny lute", "a cyclops optometrist",
+  "a sentient scarecrow learning to dance", "a gnome who races snails competitively",
+  "a tiny phoenix learning to fly for the first time", "a sentient umbrella stand with opinions",
+  "a mermaid who collects vintage typewriters", "a small griffin training to be a lifeguard",
+  "a sentient pile of mismatched socks", "a wizard's cat who secretly runs the tower",
+  "a tiny kraken who is afraid of deep water", "a sentient music box ballerina",
+  "a goblin chef who only cooks soup"
 ];
 
 const ANIMAL_MIX = [
@@ -302,77 +414,126 @@ const ANIMAL_MIX = [
   "{a1} and {a2} arm wrestling"
 ];
 
-const ABSURD_ACTIONS = [
-  "driving a hot air balloon made of cheese",
-  "sitting at a poker table with giant cards",
-  "surfing a wave of watermelon jelly",
-  "in an astronaut suit watering plants on Mars",
-  "conducting an orchestra of instruments made of vegetables",
-  "building a sandcastle as tall as a skyscraper",
-  "dancing tango with a vacuum cleaner",
-  "sitting on a throne made of giant donuts",
-  "piloting a transparent submarine full of balloons",
-  "racing on skis down an escalator",
-  "playing chess against a mirror",
-  "headbanging on a rock stage made of clouds",
-  "balancing on a giant beach ball above a chocolate volcano",
-  "driving a go-kart made of watermelons",
-  "riding a unicycle across a tightrope made of spaghetti",
-  "operating a crane that lifts a giant rubber duck",
-  "wearing a business suit while floating in zero gravity",
-  "fencing with breadsticks against an invisible opponent",
-  "skateboarding down a staircase made of books",
-  "juggling flaming bowling pins underwater",
-  "riding a giant snail through a city in fast motion",
-  "wearing scuba gear in a bathtub full of lemonade",
-  "piloting a tiny biplane through a kitchen",
-  "lifting weights made of giant marshmallows",
-  "doing yoga on top of a moving train",
-  "painting a mural using its own tail as a brush",
-  "robbing a bank using a water gun, comically",
-  "presenting a TED talk to an audience of rubber ducks",
-  "riding a motorcycle made entirely of LEGO bricks",
-  "fishing in a swimming pool full of jello",
-  "wearing roller skates while ice skating on lava lamp wax",
-  "hosting a cooking show in a kitchen that's on fire, calmly",
-  "doing the moonwalk on the surface of the moon",
-  "playing the violin while riding a mechanical bull",
-  "running a lemonade stand on top of a glacier",
-  "parachuting into a giant bowl of cereal",
-  "directing traffic made entirely of shopping carts",
-  "bowling using watermelons as balls and traffic cones as pins",
-  "riding a pogo stick across a tightrope between skyscrapers",
-  "operating a steam engine made of teapots",
-  "wearing a tuxedo while mud wrestling",
-  "playing ping pong against its own reflection",
-  "delivering pizza via hot air balloon during a storm",
-  "competing in a synchronized swimming routine alone",
-  "driving a tractor through a ball pit",
-  "performing a magic trick that goes hilariously wrong",
-  "riding an escalator the wrong way in a panic",
-  "hosting a late night talk show for other animals",
-  "skiing down a sand dune in full snow gear",
-  "playing drums made of giant gummy bears",
-  "trying to parallel park a hot air balloon",
-  "competing in an arm wrestling match with a robot",
-  "flying a kite shaped like a pizza slice during a hurricane",
-  "operating a one-animal marching band",
-  "riding a shopping cart down a hill at full speed",
-  "doing a backflip off a diving board into a pool of soup",
-  "wearing a graduation cap while herding cats, literally",
-  "trying to assemble flat-pack furniture upside down",
-  "playing a grand piano floating in the ocean",
-  "riding an old-fashioned penny-farthing bicycle through a supermarket",
-  "competing in a hot dog eating contest against a much bigger animal",
-  "stuck halfway through a doggy door, comically oversized",
-  "wearing 3D glasses while watching a black and white film",
-  "trying to walk a dozen leashed cats at once",
-  "attempting karaoke in front of an empty stadium",
-  "balancing a stack of pancakes on its nose while walking a tightrope",
-  "piloting a rowboat across a parking lot during a flood",
-  "wearing oven mitts while trying to play a video game",
-  "riding a mechanical horse at full speed in a grocery store"
+const TRAIT_PREFIXES = [
+  "a tiny", "an enormous", "a clumsy", "a fearless", "a sleepy",
+  "a flamboyant", "a stoic", "a mischievous", "an elderly", "a baby",
+  "a posh", "a grumpy", "an overly confident", "a nervous", "a majestic",
+  "a slightly confused", "a wildly enthusiastic", "a suspiciously calm",
+  "an overdressed", "an underdressed", "a heavily armored", "a glittery",
+  "a polka-dotted", "a striped", "a one-eyed", "a three-legged",
+  "a winged", "a horned", "a bearded", "a mustached", "a bespectacled",
+  "a top-hatted", "a caped", "a tattooed", "a freckled", "a sunburnt",
+  "a shivering", "a sweating", "a glowing", "a sparkly", "a wrinkly",
+  "a fluffy", "a scrawny", "a buff", "a tiny but mighty", "a regal",
+  "a timid", "a boisterous", "a dramatic", "a deadpan", "a giggly",
+  "a philosophical", "a paranoid", "an overconfident", "a forgetful",
+  "a sneaky", "a wholesome", "a chaotic", "a meticulous", "a lazy"
 ];
+
+function stripArticle(s) {
+  return s.replace(/^(a |an )/i, "");
+}
+
+function buildTraitSubject(baseList) {
+  const base = stripArticle(pickFresh(baseList));
+  const trait = pickFresh(TRAIT_PREFIXES);
+  return trait + " " + base;
+}
+
+const ABSURD_VERBS = [
+  "driving", "riding", "piloting", "wearing", "operating", "playing chess against",
+  "fencing with", "skateboarding down", "juggling", "racing on", "balancing on",
+  "headbanging next to", "dancing tango with", "lifting", "doing yoga on top of",
+  "painting a mural using its tail on", "robbing a bank with a water gun near",
+  "presenting a TED talk to", "fishing inside", "hosting a cooking show in",
+  "running a lemonade stand on top of", "parachuting into", "directing traffic made of",
+  "bowling with", "playing ping pong against", "delivering pizza via",
+  "competing in a synchronized swimming routine inside", "skiing down",
+  "trying to parallel park", "competing in an arm wrestling match with",
+  "flying a kite shaped like a pizza slice during", "operating a marching band near",
+  "doing a backflip into", "wearing a graduation cap while herding",
+  "trying to assemble", "riding a penny-farthing through",
+  "stuck halfway through", "wearing 3D glasses while watching",
+  "trying to walk a dozen leashed", "attempting karaoke in front of",
+  "balancing a stack of pancakes while walking across", "piloting a rowboat across",
+  "wearing oven mitts while trying to play", "trying to fit through",
+  "attempting to use chopsticks to eat", "wearing flippers while climbing",
+  "conducting a meeting with", "trying to vacuum", "wearing a snorkel near",
+  "attempting to parallel park a shopping cart near", "playing tug of war against",
+  "trying to use an umbrella as a parachute over", "wearing roller skates near",
+  "attempting to assemble a tent during", "trying to ride a bicycle built for",
+  "playing hopscotch on", "attempting the splits on", "wearing snowshoes across",
+  "trying to balance a tray of teacups near", "attempting to whistle while eating",
+  "wearing a full suit of armor near", "trying to fly a kite indoors during",
+  "attempting synchronized swimming in", "wearing snow boots while ice skating on",
+  "trying to read a map upside down near", "attempting to juggle watermelons on",
+  "wearing a paper hat while commanding", "trying to use a fork to eat",
+  "attempting to moonwalk across", "wearing a diving suit to water",
+  "trying to fit an enormous couch through", "attempting a dramatic exit through",
+  "wearing a cape while attempting to fly off", "trying to take a selfie with"
+];
+
+const ABSURD_OBJECTS = [
+  "a hot air balloon made of cheese", "a poker table with giant cards",
+  "a wave of watermelon jelly", "plants on Mars in a spacesuit",
+  "an orchestra of vegetables", "a sandcastle as tall as a skyscraper",
+  "a vacuum cleaner", "a throne made of giant donuts",
+  "a transparent submarine full of balloons", "an escalator going the wrong way",
+  "a mirror", "a rock stage made of clouds", "a chocolate volcano",
+  "a go-kart made of watermelons", "a tightrope made of spaghetti",
+  "a giant rubber duck", "zero gravity in a business suit", "an invisible opponent",
+  "a staircase made of books", "flaming bowling pins underwater",
+  "a giant snail through a city", "a bathtub full of lemonade",
+  "a tiny biplane through a kitchen", "giant marshmallows", "a moving train",
+  "a wall using its own tail", "a kitchen fire calmly", "an audience of rubber ducks",
+  "a motorcycle made of LEGO bricks", "a swimming pool full of jello",
+  "lava lamp wax", "a glacier", "a giant bowl of cereal",
+  "shopping carts pretending to be traffic", "watermelons and traffic cones",
+  "a tightrope between skyscrapers", "a steam engine made of teapots",
+  "mud wrestling in a tuxedo", "its own reflection", "a storm with pizza boxes",
+  "a ball pit with a tractor", "a magic trick gone wrong", "a panic on an escalator",
+  "a late night talk show for other animals", "a sand dune in full snow gear",
+  "drums made of giant gummy bears", "a hot air balloon", "a robot",
+  "a hurricane", "a one-animal marching band", "a hill at full speed",
+  "a pool of soup", "cats, literally", "flat-pack furniture upside down",
+  "a grand piano floating in the ocean", "a supermarket", "a much bigger animal",
+  "a doggy door, comically oversized", "a black and white film",
+  "a dozen leashed cats", "an empty stadium", "a tightrope",
+  "a parking lot during a flood", "a video game", "a grocery store",
+  "a cat flap while wearing a backpack", "soup", "a living room like a chariot",
+  "a ladder", "houseplants", "the ceiling out of confusion", "a desert",
+  "a shopping cart with one wheel stuck", "a much larger inanimate object",
+  "a thunderstorm", "a freshly waxed floor", "a tent in a hurricane",
+  "someone twice its size", "a chessboard with oversized pieces", "an ice rink",
+  "a beach", "a skateboard", "crackers, unsuccessfully", "a yoga class",
+  "a thunderstorm indoors", "a kiddie pool", "a frozen lake", "being lost",
+  "a unicycle", "an imaginary army", "stubbornness", "a gravel path",
+  "a single houseplant", "a tiny doorway alone", "a glass door",
+  "a low stool", "a very unwilling cloud"
+];
+
+const ABSURD_CONTEXTS = [
+  "in the middle of a busy supermarket", "during a quiet library afternoon",
+  "in a city park at sunset", "during a fancy dinner party", "in pouring rain",
+  "on top of a skyscraper", "in the middle of a desert",
+  "during a school talent show", "at a crowded train station",
+  "in complete silence", "while everyone stares in confusion",
+  "during a thunderstorm", "in a tiny apartment",
+  "at a fancy art gallery opening", "on a moving train",
+  "during a wedding reception", "in zero gravity",
+  "at the bottom of a swimming pool", "during a snowstorm",
+  "on a tiny rowboat", "in an elevator stuck between floors",
+  "during a costume party", "at a busy farmers market",
+  "on a rooftop at dawn", "during a live television broadcast"
+];
+
+function buildCombinedAction(verbs, objects, contexts) {
+  let action = pickFresh(verbs) + " " + pickFresh(objects);
+  if (contexts && Math.random() < 0.5) {
+    action += ", " + pickFresh(contexts);
+  }
+  return action;
+}
 
 const VISUAL_STYLES = [
   "hyperrealistic editorial photography, 85mm lens, soft natural light",
@@ -394,40 +555,81 @@ const VISUAL_STYLES = [
   "ukiyo-e woodblock print style, flat color planes, bold outlines",
   "cinematic film still, anamorphic lens flare, teal and orange grading",
   "vintage National Geographic documentary photography style",
-  "charcoal sketch on textured paper, soft smudged shading"
+  "charcoal sketch on textured paper, soft smudged shading",
+  "isometric diorama render, soft ambient occlusion",
+  "risograph print style, limited color palette, visible grain",
+  "vintage travel poster illustration, flat bold shapes",
+  "paper cutout collage style, layered shadows",
+  "linocut print style, bold textured lines",
+  "vintage Polaroid photography, soft light leaks",
+  "anime cel-shaded style, vibrant flat colors",
+  "infrared photography effect, surreal color shift",
+  "sun-bleached vintage film photography, grainy texture",
+  "pixel art style, retro 16-bit color palette",
+  "embroidered fabric texture illustration, stitched detail",
+  "stained glass window style, bold color segments",
+  "wet plate collodion photography, vintage sepia tones",
+  "graphic novel ink wash style, dramatic shadows"
 ];
 
-const CUTE_ACTIONS = [
-  "napping in a tiny knitted hammock",
-  "holding a small umbrella in gentle rain",
-  "curled up inside a teacup",
-  "wearing a tiny cozy sweater by a fireplace",
-  "blowing dandelion seeds into the breeze",
-  "reading a tiny storybook under a blanket fort",
-  "carrying a basket of fresh strawberries",
-  "splashing happily in a puddle after rain",
-  "wrapped in a soft scarf during the first snowfall",
-  "sitting on a windowsill watching falling leaves",
-  "holding a single daisy in its paws",
-  "snuggled inside a giant teacup full of cocoa",
-  "sleeping peacefully on a stack of soft pillows",
-  "carrying a lantern through a quiet forest at dusk",
-  "baking tiny cookies in a cozy kitchen",
-  "floating gently on a lily pad",
-  "wearing tiny mittens and a bobble hat",
-  "tending to a small garden of wildflowers",
-  "curled up next to a warm cup of tea",
-  "watching fireflies on a summer evening",
-  "wrapped in fairy lights under a starry sky",
-  "carrying a bundle of fresh flowers home",
-  "peeking out from under a cozy blanket",
-  "sitting on a swing under a cherry blossom tree",
-  "holding hands with a tiny friend on a walk",
-  "wearing a flower crown in a meadow",
-  "drinking hot chocolate by a frosty window",
-  "tucked into a tiny bed made of leaves",
-  "playing with soap bubbles in golden sunlight",
-  "wrapped up warm watching the snow fall outside"
+const CUTE_VERBS = [
+  "napping in", "holding", "curled up inside", "wearing", "blowing",
+  "reading near", "carrying", "splashing happily in", "wrapped in",
+  "sitting on", "snuggled inside", "sleeping peacefully on",
+  "carrying a lantern through", "baking near", "floating gently on",
+  "tending to", "curled up next to", "watching", "wrapped under",
+  "peeking out from under", "sitting on a swing under",
+  "holding hands near", "drinking hot chocolate by", "tucked into",
+  "playing with bubbles in", "wrapped up warm watching",
+  "carrying a tiny watering can to", "curled up asleep inside",
+  "blowing a kiss while floating on", "tucked snugly into",
+  "holding a paper lantern at", "sitting inside",
+  "peeking through a curtain of", "wrapped in a towel after",
+  "holding a tiny candle in", "snuggled into",
+  "carefully carrying a snail across", "sitting under",
+  "wearing a raincoat and matching hat near",
+  "holding a warm mug near", "watching the sunrise from",
+  "wearing fuzzy socks and reading by", "curled up with",
+  "wrapped in a quilt near", "holding a small jar of fireflies at",
+  "sitting on a stack shaped like", "tending a tiny greenhouse of",
+  "curled up in a sunbeam near"
+];
+
+const CUTE_OBJECTS = [
+  "a tiny knitted hammock", "a small umbrella in gentle rain", "a teacup",
+  "a cozy fireplace", "dandelion seeds into the breeze",
+  "a tiny storybook under a blanket fort", "a basket of fresh strawberries",
+  "a puddle after rain", "a soft scarf during the first snowfall",
+  "a windowsill watching falling leaves", "a single daisy",
+  "a giant teacup full of cocoa", "a stack of soft pillows",
+  "a quiet forest at dusk", "tiny cookies in a cozy kitchen",
+  "a lily pad", "a small garden of wildflowers", "a warm cup of tea",
+  "fireflies on a summer evening", "fairy lights under a starry sky",
+  "a bundle of fresh flowers", "a cozy blanket",
+  "a cherry blossom tree", "a tiny friend on a walk", "a frosty window",
+  "a tiny bed made of leaves", "golden sunlight", "the snow falling outside",
+  "a row of seedlings", "an oversized mitten", "a fluffy cloud",
+  "tiny rain boots and puddles", "a matchbox bed",
+  "a quiet evening festival", "a picnic basket full of berries",
+  "a knitted scarf far too long for its size", "a tiny hot water bottle",
+  "a single autumn leaf", "falling cherry blossoms",
+  "a warm bath", "a cozy dark room", "warm laundry fresh from the dryer",
+  "a garden path", "a giant mushroom during light rain",
+  "both paws, eyes closed happily", "a nest of soft moss",
+  "a treehouse window", "candlelight", "a favorite stuffed toy",
+  "patchwork stars", "dusk", "pancakes shaped like clouds",
+  "herbs in tiny pots", "a quiet afternoon"
+];
+
+const CUTE_CONTEXTS = [
+  "on a misty spring morning", "during the first snow of winter",
+  "as golden hour light fades", "while soft rain taps the window",
+  "under a sky full of stars", "as autumn leaves drift down",
+  "in a quiet countryside cottage", "by a crackling fireplace",
+  "during a slow lazy Sunday", "as fireflies begin to glow",
+  "while wrapped in complete contentment", "as the world quietly wakes up",
+  "during a gentle summer breeze", "as snowflakes settle softly",
+  "in the hush of early morning"
 ];
 
 const CUTE_STYLES = [
@@ -440,11 +642,159 @@ const CUTE_STYLES = [
   "felt and yarn craft style, handmade cozy texture",
   "pastel chalk illustration, soft blended colors",
   "gentle 3D render, soft pastel lighting, rounded forms",
-  "vintage nursery illustration style, muted warm palette"
+  "vintage nursery illustration style, muted warm palette",
+  "soft fleece felting texture, plush handmade look",
+  "gentle gouache painting, matte soft colors",
+  "vintage botanical illustration style, delicate linework",
+  "cozy autumn photography, warm amber tones",
+  "paper quilling craft style, layered soft shapes",
+  "soft pencil illustration, gentle cross-hatching",
+  "warm candlelit photography, soft golden glow",
+  "vintage tin toy illustration style, nostalgic charm",
+  "dreamy pastel anime style, soft blush tones"
 ];
 
+const DEGEN_VERBS = [
+  "staring intensely at", "celebrating with confetti in front of",
+  "holding", "wearing", "crying dramatically at",
+  "sitting cross-legged meditating in front of",
+  "screaming joyfully while throwing papers near",
+  "sleeping peacefully on", "refreshing", "standing on top of",
+  "riding", "sitting in", "frantically typing near",
+  "doing a victory dance in front of", "sitting calmly in",
+  "holding a telescope toward", "building a tiny version of",
+  "sitting in a lawn chair watching", "frantically waving a fan at",
+  "standing proudly next to", "balancing precariously on",
+  "wearing noise-cancelling headphones near", "holding a magnet near",
+  "sitting calmly in a rowboat near", "standing on a tiny podium near",
+  "holding a slingshot aimed at", "doing push-ups in front of",
+  "holding a treasure map leading to", "standing triumphantly atop",
+  "holding two phones near", "sitting in a hammock between",
+  "holding a fishing net trying to catch", "steering through",
+  "standing at a podium giving a speech to", "examining closely with a magnifying glass"
+];
+
+const DEGEN_OBJECTS = [
+  "a glowing red downward chart", "a glowing green upward chart",
+  "a tiny rocket ship", "tiny rocket icons on a t-shirt",
+  "a desk covered in candlestick charts", "diamond-shaped sunglasses",
+  "a briefcase stuffed with confetti", "glowing screens",
+  "a trading desk", "a single golden coin", "a pile of glowing screens",
+  "a phone at 3am", "a mountain holding a flag", "multiple monitors",
+  "two enormous diamond gems", "a starry night sky full of rockets",
+  "a hot tub of floating gold coins", "a rooftop at sunset",
+  "a tiny keyboard", "a giant glowing coin", "a wall of green numbers",
+  "potions labeled with question marks", "a thunderstorm, unbothered",
+  "the horizon", "a cardboard rocket in a garage",
+  "chaos at night, unfazed", "a single shiny coin", "the moon, sipping a drink",
+  "an overheating laptop", "a hand-painted sign with an arrow pointing up",
+  "a stack of paper flying in the wind", "a giant seesaw shaped like a chart line",
+  "everything around being chaotic", "scattered coins",
+  "a stormy sea of paperwork", "a glowing screen with a spell",
+  "an invisible trophy", "the moon with determination",
+  "a cardboard rocket", "a wall of scrolling numbers",
+  "a giant glowing question mark", "a coin with great seriousness",
+  "a pile of pillows shaped like a mountain", "anticipation",
+  "receipt paper fluttering dramatically", "two giant exclamation marks",
+  "falling stars", "an inflatable pool toy through a storm",
+  "an audience of houseplants", "a tiny golden coin"
+];
+
+const DEGEN_CONTEXTS = [
+  "at 3am with three monitors glowing", "during a chaotic trading floor scene",
+  "while the whole room watches in suspense", "with a single spotlight overhead",
+  "as confetti cannons go off in the background", "during a livestream gone wrong",
+  "while everyone around is frozen in shock", "as numbers scroll endlessly behind",
+  "during an unexpected market swing", "with dramatic lighting and fog machines",
+  "as a crowd cheers from the sidelines", "while sirens wail faintly in the distance",
+  "during the most chaotic five minutes of the day", "as the countdown clock hits zero",
+  "while everything around it is on fire, metaphorically"
+];
+
+const DEGEN_STYLES = [
+  "vibrant neon cyberpunk illustration, glowing accents",
+  "retro 1980s synthwave poster art, neon gradient sky",
+  "bold flat vector illustration, high contrast colors",
+  "glossy 3D render, dramatic studio lighting",
+  "comic book style, dynamic action lines, bold colors",
+  "vaporwave aesthetic, pastel neon palette, grid backgrounds",
+  "cinematic digital painting, dramatic rim lighting",
+  "modern editorial illustration, bold geometric shapes",
+  "holographic foil illustration, iridescent reflections",
+  "glitch art style, chromatic aberration, digital distortion",
+  "bold graffiti street art style, dripping spray paint texture",
+  "high-energy motion blur photography, dynamic action",
+  "metallic chrome 3D render, dramatic specular highlights",
+  "arcade game pixel art style, vibrant 8-bit palette",
+  "explosive comic book splash page style, bold sound effect shapes",
+  "luxury product photography, dramatic dark studio lighting"
+];
+
+function deriveNameRoot(subject) {
+  let s = subject.replace(/^(a |an |three )/i, "");
+  const words = s.split(" ").filter(Boolean);
+  let word = words.length > 0 ? words[words.length - 1] : s;
+  word = word.replace(/[^a-zA-Z]/g, "");
+  if (!word) word = "Critter";
+  return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+}
+
+const PREFIX_RULES = [
+  [/\bfly|\bwing|\bsky|\bballoon|\bkite|\bparachute|\bbiplane/i, "Aero"],
+  [/\bfire|\blava|\bflame|\bvolcano/i, "Pyro"],
+  [/\bspace|\bastronaut|\bmars|\bstar|\brocket/i, "Astro"],
+  [/\bwater|\bocean|\bsubmarine|\bsurf|\bsea\b|\bpool|\bjelly|\bfish|\bswim/i, "Aqua"],
+  [/\bice|\bsnow|\bglacier|\bfrost/i, "Glacio"],
+  [/\bmusic|\borchestra|\bdrum|\bviolin|\bpiano|rock stage|karaoke/i, "Melo"],
+  [/\brobot|\bmechanical|\bclockwork|\bgear/i, "Mecha"],
+  [/\bchess|\bpoker|\bcard\b|\bmirror/i, "Cunning"],
+  [/\bcake|\bdonut|\bcookie|\bchocolate|\bcandy|\bpancake|\bsugar|\bcocoa/i, "Sugar"],
+  [/\bking\b|\bthrone|\bcrown|\broyal/i, "Royal"],
+  [/\bghost|\bspooky/i, "Spectro"],
+  [/\bgarden|\bflower|\bleaf|\bbloom|\bdaisy/i, "Bloom"],
+  [/\bchart|\bcoin|\brocket|\bdiamond|\bgold/i, "Degen"],
+  [/\bblanket|\bcozy|\bwarm\b|\bsweater/i, "Cozy"],
+  [/\bskate|\brace|\bspeed|\bfast\b/i, "Turbo"],
+  [/\bvolcano|\bthunder|\bstorm|\blightning/i, "Storm"],
+  [/\bmoon\b|\bnight|\bstars\b/i, "Lunar"],
+  [/\bsun\b|\bsunny|\bgolden hour|\bsunset|\bsunrise/i, "Solar"],
+  [/\bcrystal|\bglitter|\bsparkl|\bgem/i, "Crystal"],
+  [/\bshadow|\bdark\b|\bmidnight/i, "Shadow"],
+  [/\bwizard|\bmagic|\bspell|\bpotion/i, "Mystic"],
+  [/\bjazz|\bdisco|\bdance|\btango/i, "Disco"],
+  [/\bgarden\b|\bmeadow|\bforest/i, "Woodland"]
+];
+
+const FALLBACK_PREFIXES = [
+  "Mega", "Ultra", "Super", "Captain", "Lord", "Sir", "Madame",
+  "Doctor", "Professor", "Agent", "Baron", "Commander", "Cosmo",
+  "Neo", "Volt", "Echo", "Nova", "Zen", "Velvet", "Quantum",
+  "Giga", "Nano", "Retro", "Funk", "Rune", "Bolt", "Spark",
+  "Whirl", "Glimmer", "Pixel", "Marvel", "Bizarro", "Wonder",
+  "Grandmaster", "Chief", "Duke", "Duchess", "Count", "Sergeant",
+  "Maestro", "Wanderer", "Rogue", "Ranger", "Knight", "Sultan",
+  "Pharaoh", "Admiral", "Sheriff", "Viscount", "Jolly", "Plucky",
+  "Dapper", "Swift", "Brave", "Noble", "Sly", "Witty", "Dashing"
+];
+
+function generateMemeName(subjectRaw, fullText) {
+  const root = deriveNameRoot(subjectRaw);
+  const matches = [];
+  for (const [regex, p] of PREFIX_RULES) {
+    if (regex.test(fullText)) matches.push(p);
+  }
+
+  let prefix;
+  if (matches.length > 0 && Math.random() < 0.55) {
+    prefix = matches[Math.floor(Math.random() * matches.length)];
+  } else {
+    prefix = pick(FALLBACK_PREFIXES);
+  }
+  return prefix + root;
+}
+
 const RECENT_HISTORY_KEY = "recent-elements";
-const RECENT_LIMIT = 12;
+const RECENT_LIMIT = 30;
 
 function getRecentlyUsed() {
   try {
@@ -660,33 +1010,55 @@ function generateIdea(customSubject, mode) {
   let subject;
   if (customSubject && customSubject.trim()) {
     subject = customSubject.trim();
-  } else if (mode === "cute") {
-    if (Math.random() < 0.5) {
+  } else if (mode === "cute" || mode === "degen") {
+    const roll = Math.random();
+    if (roll < 0.4) {
+      subject = buildTraitSubject(ANIMALS);
+    } else if (roll < 0.55) {
+      subject = buildTraitSubject(INVENTED_CHARACTERS);
+    } else if (roll < 0.8) {
       subject = pickFresh(ANIMALS);
     } else {
       subject = pickFresh(INVENTED_CHARACTERS);
     }
   } else {
     const roll = Math.random();
-    if (roll < 0.35) {
+    if (roll < 0.25) {
       const [a1, a2] = pickTwoDistinct(ANIMALS);
       subject = pickFresh(ANIMAL_MIX).replace("{a1}", a1).replace("{a2}", a2);
-    } else if (roll < 0.7) {
+    } else if (roll < 0.5) {
+      subject = buildTraitSubject(ANIMALS);
+    } else if (roll < 0.65) {
+      subject = buildTraitSubject(INVENTED_CHARACTERS);
+    } else if (roll < 0.85) {
       subject = pickFresh(ANIMALS);
     } else {
       subject = pickFresh(INVENTED_CHARACTERS);
     }
   }
-  const action = mode === "cute" ? pickFresh(CUTE_ACTIONS) : pickFresh(ABSURD_ACTIONS);
-  const style = mode === "cute" ? pickFresh(CUTE_STYLES) : pickFresh(VISUAL_STYLES);
-  rememberUsed([subject, action, style]);
-  return { description: subject + " " + action, style, mode };
+
+  let action, style;
+  if (mode === "cute") {
+    action = buildCombinedAction(CUTE_VERBS, CUTE_OBJECTS, CUTE_CONTEXTS);
+    style = pickFresh(CUTE_STYLES);
+  } else if (mode === "degen") {
+    action = buildCombinedAction(DEGEN_VERBS, DEGEN_OBJECTS, DEGEN_CONTEXTS);
+    style = pickFresh(DEGEN_STYLES);
+  } else {
+    action = buildCombinedAction(ABSURD_VERBS, ABSURD_OBJECTS, ABSURD_CONTEXTS);
+    style = pickFresh(VISUAL_STYLES);
+  }
+
+  rememberUsed([subject, style]);
+  const description = subject + " " + action;
+  const name = generateMemeName(subject, description + " " + style);
+  return { description, style, mode, subject, name };
 }
 
 function buildPrompt(idea) {
-  const tone = idea.mode === "cute"
-    ? "warm and heartwarming composition, soft cozy mood"
-    : "absurd and comedic composition";
+  let tone = "absurd and comedic composition";
+  if (idea.mode === "cute") tone = "warm and heartwarming composition, soft cozy mood";
+  if (idea.mode === "degen") tone = "energetic and dramatic composition, internet culture humor";
   return idea.description + ", " + idea.style + ", " + tone + ", professional quality, sharp focus, highly detailed, well-balanced composition, no text or writing or watermark in the image";
 }
 
@@ -735,6 +1107,17 @@ async function fetchMemes() {
   return res.json();
 }
 
+async function fetchTopMemes(period) {
+  let url = SUPABASE_URL + "/rest/v1/memes?select=*&order=likes.desc&limit=10";
+  if (period === "week") {
+    const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+    url += "&created_at=gte." + weekAgo;
+  }
+  const res = await fetch(url, { headers: supabaseHeaders() });
+  if (!res.ok) throw new Error("Failed to fetch top memes: " + res.status);
+  return res.json();
+}
+
 async function likeMeme(memeId, currentLikes) {
   const res = await fetch(SUPABASE_URL + "/rest/v1/memes?id=eq." + memeId, {
     method: "PATCH",
@@ -754,11 +1137,19 @@ async function fetchComments(memeId) {
   return res.json();
 }
 
-async function postComment(memeId, body) {
+function getNickname() {
+  return localStorage.getItem("nickname") || "";
+}
+
+function setNickname(name) {
+  localStorage.setItem("nickname", name);
+}
+
+async function postComment(memeId, body, nickname) {
   const res = await fetch(SUPABASE_URL + "/rest/v1/comments", {
     method: "POST",
     headers: { ...supabaseHeaders(), "Prefer": "return=representation" },
-    body: JSON.stringify({ meme_id: memeId, body: body })
+    body: JSON.stringify({ meme_id: memeId, body: body, nickname: nickname || "Anonymous" })
   });
   if (!res.ok) throw new Error("Failed to post comment: " + res.status);
   return res.json();
@@ -776,6 +1167,28 @@ function markMemeAsLiked(memeId) {
   const liked = getLikedMemes();
   liked.push(memeId);
   localStorage.setItem("liked-memes", JSON.stringify(liked));
+}
+
+function updateStreak() {
+  const today = new Date().toDateString();
+  let visits = [];
+  try {
+    visits = JSON.parse(localStorage.getItem("visit-dates") || "[]");
+  } catch (e) {
+    visits = [];
+  }
+  if (!visits.includes(today)) {
+    visits.push(today);
+    localStorage.setItem("visit-dates", JSON.stringify(visits));
+  }
+
+  let streak = 0;
+  let cursor = new Date();
+  while (visits.includes(cursor.toDateString())) {
+    streak++;
+    cursor.setDate(cursor.getDate() - 1);
+  }
+  document.getElementById("stat-streak").textContent = streak;
 }
 
 async function trackVisit() {
@@ -819,6 +1232,8 @@ function updateStats(memes) {
   const today = new Date().toDateString();
   const todayCount = memes.filter((m) => new Date(m.created_at).toDateString() === today).length;
   document.getElementById("stat-today").textContent = todayCount;
+  const totalLikes = memes.reduce((sum, m) => sum + (m.likes || 0), 0);
+  document.getElementById("stat-likes").textContent = totalLikes.toLocaleString();
 }
 
 function renderGallery(memes) {
@@ -862,7 +1277,14 @@ function renderGallery(memes) {
 
     const caption = document.createElement("p");
     caption.className = "caption";
-    caption.textContent = m.caption;
+    if (m.name) {
+      const nameEl = document.createElement("span");
+      nameEl.className = "meme-name";
+      nameEl.textContent = m.name;
+      caption.appendChild(nameEl);
+      caption.appendChild(document.createElement("br"));
+    }
+    caption.appendChild(document.createTextNode(m.caption));
 
     card.appendChild(imgWrap);
     card.appendChild(caption);
@@ -906,8 +1328,37 @@ function buildCardActions(m) {
   commentToggle.className = "comment-toggle";
   commentToggle.textContent = "Comments";
 
+  const shareBtn = document.createElement("button");
+  shareBtn.className = "comment-toggle share-btn";
+  shareBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:4px;"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>Share';
+
+  const shareMenu = document.createElement("div");
+  shareMenu.className = "share-menu";
+  const pageUrl = window.location.href.split("?")[0];
+  const shareText = (m.name ? m.name + " — " : "") + m.caption;
+
+  const twitterLink = document.createElement("a");
+  twitterLink.href = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(shareText) + "&url=" + encodeURIComponent(pageUrl);
+  twitterLink.target = "_blank";
+  twitterLink.rel = "noopener";
+  twitterLink.textContent = "Share on X";
+
+  const telegramLink = document.createElement("a");
+  telegramLink.href = "https://t.me/share/url?url=" + encodeURIComponent(pageUrl) + "&text=" + encodeURIComponent(shareText);
+  telegramLink.target = "_blank";
+  telegramLink.rel = "noopener";
+  telegramLink.textContent = "Share on Telegram";
+
+  shareMenu.appendChild(twitterLink);
+  shareMenu.appendChild(telegramLink);
+
+  shareBtn.addEventListener("click", () => {
+    shareMenu.classList.toggle("open");
+  });
+
   actions.appendChild(likeBtn);
   actions.appendChild(commentToggle);
+  actions.appendChild(shareBtn);
 
   const section = buildCommentsSection(m);
   commentToggle.addEventListener("click", () => {
@@ -920,6 +1371,7 @@ function buildCardActions(m) {
 
   const wrapper = document.createElement("div");
   wrapper.appendChild(actions);
+  wrapper.appendChild(shareMenu);
   wrapper.appendChild(section);
   return wrapper;
 }
@@ -931,6 +1383,17 @@ function buildCommentsSection(m) {
   const list = document.createElement("div");
   list.className = "comments-list";
   list.innerHTML = '<p class="comment-empty">Loading comments...</p>';
+
+  const nicknameRow = document.createElement("div");
+  nicknameRow.style.cssText = "margin-bottom:6px;";
+  const nicknameInput = document.createElement("input");
+  nicknameInput.type = "text";
+  nicknameInput.placeholder = "Your name (optional)";
+  nicknameInput.maxLength = 30;
+  nicknameInput.value = getNickname();
+  nicknameInput.style.cssText = "width:100%;border:1.5px solid #ece9e1;border-radius:999px;padding:6px 12px;font-size:12px;font-family:'Inter',sans-serif;outline:none;";
+  nicknameInput.addEventListener("change", () => setNickname(nicknameInput.value.trim()));
+  nicknameRow.appendChild(nicknameInput);
 
   const form = document.createElement("div");
   form.className = "comment-form";
@@ -944,9 +1407,11 @@ function buildCommentsSection(m) {
   submitBtn.addEventListener("click", async () => {
     const text = input.value.trim();
     if (!text) return;
+    const nickname = nicknameInput.value.trim();
+    setNickname(nickname);
     submitBtn.disabled = true;
     try {
-      await postComment(m.id, text);
+      await postComment(m.id, text, nickname);
       input.value = "";
       await loadCommentsInto(section, m.id);
     } catch (e) {
@@ -963,6 +1428,7 @@ function buildCommentsSection(m) {
   form.appendChild(input);
   form.appendChild(submitBtn);
   section.appendChild(list);
+  section.appendChild(nicknameRow);
   section.appendChild(form);
   return section;
 }
@@ -978,7 +1444,11 @@ async function loadCommentsInto(section, memeId) {
       comments.forEach((c) => {
         const item = document.createElement("div");
         item.className = "comment-item";
-        item.textContent = c.body;
+        const nameSpan = document.createElement("strong");
+        nameSpan.style.cssText = "color:#ff5e62;";
+        nameSpan.textContent = (c.nickname || "Anonymous") + ": ";
+        item.appendChild(nameSpan);
+        item.appendChild(document.createTextNode(c.body));
         list.appendChild(item);
       });
     }
@@ -1023,10 +1493,78 @@ async function refreshGallery() {
   try {
     const memes = await fetchMemes();
     renderGallery(memes);
+    renderMemeOfTheDay(memes);
   } catch (e) {
     console.error(e);
   }
 }
+
+function renderMemeOfTheDay(memes) {
+  const container = document.getElementById("motd-section");
+  if (!memes || memes.length === 0) {
+    container.innerHTML = "";
+    return;
+  }
+  const today = new Date().toDateString();
+  const todays = memes.filter((m) => new Date(m.created_at).toDateString() === today);
+  const pool = todays.length > 0 ? todays : memes;
+  const winner = pool.reduce((best, m) => ((m.likes || 0) > (best.likes || 0) ? m : best), pool[0]);
+
+  container.innerHTML =
+    '<div class="motd-card">' +
+      '<img class="motd-img" src="' + winner.image_url + '" alt="" />' +
+      '<div>' +
+        '<div class="motd-label">⭐ Meme of the day</div>' +
+        '<div class="motd-name">' + (winner.name || "Unnamed") + '</div>' +
+        '<div class="motd-caption">' + winner.caption + ' · ' + (winner.likes || 0) + ' likes</div>' +
+      '</div>' +
+    '</div>';
+}
+
+async function renderLeaderboard(period) {
+  const list = document.getElementById("leaderboard-list");
+  list.innerHTML = '<p class="comment-empty">Loading...</p>';
+  try {
+    const memes = await fetchTopMemes(period);
+    if (memes.length === 0) {
+      list.innerHTML = '<p class="comment-empty">No memes yet for this period.</p>';
+      return;
+    }
+    list.innerHTML = "";
+    memes.forEach((m, i) => {
+      const row = document.createElement("div");
+      row.className = "lb-row";
+      row.innerHTML =
+        '<span class="lb-rank">#' + (i + 1) + '</span>' +
+        '<img class="lb-img" src="' + m.image_url + '" alt="" />' +
+        '<div class="lb-info">' +
+          '<div class="lb-name">' + (m.name || "Unnamed") + '</div>' +
+          '<div class="lb-caption">' + m.caption + '</div>' +
+        '</div>' +
+        '<span class="lb-likes">❤ ' + (m.likes || 0) + '</span>';
+      list.appendChild(row);
+    });
+  } catch (e) {
+    console.error(e);
+    list.innerHTML = '<p class="comment-empty">Couldn\'t load leaderboard.</p>';
+  }
+}
+
+document.getElementById("leaderboard-toggle").addEventListener("click", () => {
+  const section = document.getElementById("leaderboard-section");
+  section.classList.toggle("open");
+  if (section.classList.contains("open")) {
+    renderLeaderboard("week");
+  }
+});
+
+document.querySelectorAll(".lb-tab").forEach((tab) => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll(".lb-tab").forEach((t) => t.classList.remove("active"));
+    tab.classList.add("active");
+    renderLeaderboard(tab.dataset.period);
+  });
+});
 
 async function generateOneMeme(mode, triggerBtn) {
   mode = mode || "absurd";
@@ -1050,7 +1588,7 @@ async function generateOneMeme(mode, triggerBtn) {
     const permanentUrl = await uploadToStorage(blob, filename);
 
     const caption = pickFreshCaption();
-    await insertMeme({ image_url: permanentUrl, caption: caption });
+    await insertMeme({ image_url: permanentUrl, caption: caption, name: idea.name });
     document.getElementById("prompt-input").value = "";
     await refreshGallery();
   } catch (e) {
@@ -1064,6 +1602,7 @@ async function generateOneMeme(mode, triggerBtn) {
 
 document.getElementById("generate-absurd-btn").addEventListener("click", (e) => generateOneMeme("absurd", e.currentTarget));
 document.getElementById("generate-cute-btn").addEventListener("click", (e) => generateOneMeme("cute", e.currentTarget));
+document.getElementById("generate-degen-btn").addEventListener("click", (e) => generateOneMeme("degen", e.currentTarget));
 document.getElementById("refresh-btn").addEventListener("click", refreshGallery);
 
 const INTERVAL_MS = 10 * 60 * 1000;
@@ -1072,6 +1611,7 @@ setInterval(refreshGallery, 30000);
 
 refreshGallery();
 trackVisit();
+updateStreak();
 </script>
 </body>
 </html>
