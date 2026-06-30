@@ -72,6 +72,13 @@
   }
   .btn-primary:hover { box-shadow: 0 8px 26px rgba(255,94,98,0.42); transform: translateY(-1px); }
   .btn-primary:disabled { opacity: 0.55; cursor: default; box-shadow: none; transform: none; }
+  .btn-cute {
+    background: linear-gradient(135deg, #ffb6d9, #c9a6f7);
+    color: white;
+    box-shadow: 0 6px 20px rgba(201,166,247,0.35);
+  }
+  .btn-cute:hover { box-shadow: 0 8px 26px rgba(201,166,247,0.45); transform: translateY(-1px); }
+  .btn-cute:disabled { opacity: 0.55; cursor: default; box-shadow: none; transform: none; }
   .btn-secondary {
     background: white; color: #333; border: 1.5px solid #e6e3db !important;
   }
@@ -203,9 +210,13 @@
   </div>
 
   <div class="toolbar">
-    <button id="generate-btn" class="btn-primary">
+    <button id="generate-absurd-btn" class="btn-primary">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1.2" fill="currentColor"/><circle cx="15.5" cy="8.5" r="1.2" fill="currentColor"/><circle cx="8.5" cy="15.5" r="1.2" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg>
-      Generate now
+      Generate absurd
+    </button>
+    <button id="generate-cute-btn" class="btn-cute">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+      Generate cute
     </button>
     <button id="refresh-btn" class="btn-secondary">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-2.6-6.36"/><path d="M21 4v5h-5"/></svg>
@@ -386,6 +397,52 @@ const VISUAL_STYLES = [
   "charcoal sketch on textured paper, soft smudged shading"
 ];
 
+const CUTE_ACTIONS = [
+  "napping in a tiny knitted hammock",
+  "holding a small umbrella in gentle rain",
+  "curled up inside a teacup",
+  "wearing a tiny cozy sweater by a fireplace",
+  "blowing dandelion seeds into the breeze",
+  "reading a tiny storybook under a blanket fort",
+  "carrying a basket of fresh strawberries",
+  "splashing happily in a puddle after rain",
+  "wrapped in a soft scarf during the first snowfall",
+  "sitting on a windowsill watching falling leaves",
+  "holding a single daisy in its paws",
+  "snuggled inside a giant teacup full of cocoa",
+  "sleeping peacefully on a stack of soft pillows",
+  "carrying a lantern through a quiet forest at dusk",
+  "baking tiny cookies in a cozy kitchen",
+  "floating gently on a lily pad",
+  "wearing tiny mittens and a bobble hat",
+  "tending to a small garden of wildflowers",
+  "curled up next to a warm cup of tea",
+  "watching fireflies on a summer evening",
+  "wrapped in fairy lights under a starry sky",
+  "carrying a bundle of fresh flowers home",
+  "peeking out from under a cozy blanket",
+  "sitting on a swing under a cherry blossom tree",
+  "holding hands with a tiny friend on a walk",
+  "wearing a flower crown in a meadow",
+  "drinking hot chocolate by a frosty window",
+  "tucked into a tiny bed made of leaves",
+  "playing with soap bubbles in golden sunlight",
+  "wrapped up warm watching the snow fall outside"
+];
+
+const CUTE_STYLES = [
+  "soft pastel illustration, gentle rounded shapes, warm lighting",
+  "kawaii style illustration, big sparkly eyes, soft color palette",
+  "cozy watercolor painting, dreamy soft edges, warm tones",
+  "children's storybook illustration style, soft textures, gentle colors",
+  "soft focus photography, warm golden light, dreamy bokeh",
+  "Studio Ghibli inspired illustration, lush soft backgrounds",
+  "felt and yarn craft style, handmade cozy texture",
+  "pastel chalk illustration, soft blended colors",
+  "gentle 3D render, soft pastel lighting, rounded forms",
+  "vintage nursery illustration style, muted warm palette"
+];
+
 const RECENT_HISTORY_KEY = "recent-elements";
 const RECENT_LIMIT = 12;
 
@@ -428,8 +485,166 @@ const LOCAL_CAPTIONS = [
   "Unexpected results, as always.",
   "Who gave him permission?",
   "Yeah, that's fine, actually.",
-  "A classic by now."
+  "A classic by now.",
+  "10 out of 10, no notes.",
+  "This is the energy we need.",
+  "Absolutely thriving.",
+  "Living its best life.",
+  "Main character behavior.",
+  "We don't deserve this little guy.",
+  "Protect this one at all costs.",
+  "Confidence level: maximum.",
+  "Nailed it.",
+  "This is fine, everything is fine.",
+  "Big plans, small understanding of physics.",
+  "Some are born for greatness.",
+  "Iconic, honestly.",
+  "Not the hero we asked for, but the one we got.",
+  "Just vibing.",
+  "Pure, undiluted chaos.",
+  "Five stars, would watch again.",
+  "Caught in 4K.",
+  "This is why we can't have nice things.",
+  "A true professional at work.",
+  "Send help. Or don't, this is great.",
+  "Plot twist nobody saw coming.",
+  "Unbothered. Moisturized. In their lane.",
+  "The audacity, honestly.",
+  "Absolute legend.",
+  "This deserves an award.",
+  "Couldn't have planned it better.",
+  "Some questions don't need answers.",
+  "Breaking news: this is happening.",
+  "We've all been here before.",
+  "Goals, honestly.",
+  "Not a single thought behind those eyes.",
+  "Determined and slightly lost.",
+  "This is the content I signed up for.",
+  "Stay curious, stay weird.",
+  "An icon in the making.",
+  "Pure joy, zero explanation.",
+  "Nobody tell it this isn't normal.",
+  "It just gets funnier the longer you look.",
+  "This belongs in a museum.",
+  "Confidence over competence, every time.",
+  "A masterpiece of poor decision making.",
+  "Chosen one energy.",
+  "Just doing its thing.",
+  "No notes. Perfect as is.",
+  "We stan a fearless icon.",
+  "Today, this is the main event.",
+  "A true original.",
+  "It's giving main character.",
+  "Living rent free in our heads now.",
+  "Some things just work out.",
+  "The vibes are immaculate.",
+  "Couldn't be more committed.",
+  "A wholesome disaster.",
+  "Built different, apparently.",
+  "Sheer determination right there.",
+  "An absolute unit of personality.",
+  "This is peak performance.",
+  "No regrets, only vibes.",
+  "Sometimes the best plan is no plan.",
+  "An unforgettable moment, somehow.",
+  "Fully sending it.",
+  "This is what dreams are made of.",
+  "We love an icon.",
+  "Front page material.",
+  "Lowkey a genius move.",
+  "This raises more questions than it answers.",
+  "Couldn't ask for a better representative of chaos.",
+  "Quietly winning at life.",
+  "Joy looks like this, apparently.",
+  "A new personal best.",
+  "Today's mood, summarized.",
+  "Some things just need to be seen to be believed.",
+  "Fully committed to the bit.",
+  "Storytime starts here.",
+  "Comedy gold, no script needed.",
+  "Friendly reminder that anything is possible.",
+  "Wholesome chaos, served fresh.",
+  "Some legends are born, not made. This one's both.",
+  "The bar has been set.",
+  "An unexpected hero rises.",
+  "Honestly, mood.",
+  "This is the serotonin boost we needed.",
+  "Bold choices only.",
+  "Adorable and unhinged in equal measure.",
+  "A true work of art.",
+  "The internet's new favorite.",
+  "We didn't know we needed this today.",
+  "Effortlessly iconic.",
+  "Today's lesson: just go for it.",
+  "A small victory, but a victory nonetheless.",
+  "The confidence is unmatched.",
+  "Not sure how, but here we are.",
+  "Living proof that anything goes.",
+  "An absolute treasure.",
+  "Comedy timing: immaculate.",
+  "This one's going straight to the highlight reel.",
+  "A gentle reminder to embrace the weird.",
+  "Big dreams, bigger commitment.",
+  "Certified wholesome content.",
+  "The plot thickens.",
+  "An instant classic.",
+  "We're not crying, you're crying.",
+  "This deserves a standing ovation.",
+  "Some moments just hit different.",
+  "An unlikely champion emerges.",
+  "Today's reminder that life is weird and wonderful.",
+  "Peak whimsy achieved.",
+  "Nothing to add, just enjoy it.",
+  "A new contender for best day ever.",
+  "Soft launch of a legend.",
+  "This is going straight to the family group chat.",
+  "Officially the best part of today.",
+  "Adorable chaos, fully embraced.",
+  "Some things are just meant to be funny.",
+  "A surprisingly good time, honestly.",
+  "Sweet, weird, and somehow perfect.",
+  "Today's small miracle.",
+  "The dedication here is unreal.",
+  "A heartwarming kind of ridiculous.",
+  "This is exactly the kind of nonsense we love.",
+  "Total scene-stealer.",
+  "Cuteness levels: critical.",
+  "An unbothered icon, as always.",
+  "This is the joy we were promised.",
+  "Top tier silliness.",
+  "A genuinely delightful disaster.",
+  "Nothing makes sense, and that's perfect.",
+  "We've found our new favorite thing today."
 ];
+
+const CAPTION_RECENT_KEY = "recent-captions";
+const CAPTION_RECENT_LIMIT = 50;
+
+function getRecentCaptions() {
+  try {
+    return JSON.parse(localStorage.getItem(CAPTION_RECENT_KEY) || "[]");
+  } catch (e) {
+    return [];
+  }
+}
+
+function rememberCaption(caption) {
+  let recent = getRecentCaptions();
+  recent.push(caption);
+  if (recent.length > CAPTION_RECENT_LIMIT) {
+    recent = recent.slice(recent.length - CAPTION_RECENT_LIMIT);
+  }
+  localStorage.setItem(CAPTION_RECENT_KEY, JSON.stringify(recent));
+}
+
+function pickFreshCaption() {
+  const recent = getRecentCaptions();
+  const available = LOCAL_CAPTIONS.filter((c) => !recent.includes(c));
+  const pool = available.length > 0 ? available : LOCAL_CAPTIONS;
+  const chosen = pool[Math.floor(Math.random() * pool.length)];
+  rememberCaption(chosen);
+  return chosen;
+}
 
 function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
@@ -440,10 +655,17 @@ function pickTwoDistinct(arr) {
   return [a1, a2];
 }
 
-function generateIdea(customSubject) {
+function generateIdea(customSubject, mode) {
+  mode = mode || "absurd";
   let subject;
   if (customSubject && customSubject.trim()) {
     subject = customSubject.trim();
+  } else if (mode === "cute") {
+    if (Math.random() < 0.5) {
+      subject = pickFresh(ANIMALS);
+    } else {
+      subject = pickFresh(INVENTED_CHARACTERS);
+    }
   } else {
     const roll = Math.random();
     if (roll < 0.35) {
@@ -455,14 +677,17 @@ function generateIdea(customSubject) {
       subject = pickFresh(INVENTED_CHARACTERS);
     }
   }
-  const action = pickFresh(ABSURD_ACTIONS);
-  const style = pickFresh(VISUAL_STYLES);
+  const action = mode === "cute" ? pickFresh(CUTE_ACTIONS) : pickFresh(ABSURD_ACTIONS);
+  const style = mode === "cute" ? pickFresh(CUTE_STYLES) : pickFresh(VISUAL_STYLES);
   rememberUsed([subject, action, style]);
-  return { description: subject + " " + action, style };
+  return { description: subject + " " + action, style, mode };
 }
 
 function buildPrompt(idea) {
-  return idea.description + ", " + idea.style + ", absurd and comedic composition, professional quality, sharp focus, highly detailed, well-balanced composition, no text or writing or watermark in the image";
+  const tone = idea.mode === "cute"
+    ? "warm and heartwarming composition, soft cozy mood"
+    : "absurd and comedic composition";
+  return idea.description + ", " + idea.style + ", " + tone + ", professional quality, sharp focus, highly detailed, well-balanced composition, no text or writing or watermark in the image";
 }
 
 function buildPollinationsUrl(prompt, seed) {
@@ -803,15 +1028,16 @@ async function refreshGallery() {
   }
 }
 
-async function generateOneMeme() {
-  const btn = document.getElementById("generate-btn");
+async function generateOneMeme(mode, triggerBtn) {
+  mode = mode || "absurd";
+  const btn = triggerBtn || document.getElementById("generate-absurd-btn");
   const originalLabel = btn.innerHTML;
   btn.disabled = true;
   btn.innerHTML = "Generating...";
 
   try {
     const customPrompt = document.getElementById("prompt-input").value;
-    const idea = generateIdea(customPrompt);
+    const idea = generateIdea(customPrompt, mode);
     const prompt = buildPrompt(idea);
     const seed = Math.floor(Math.random() * 1000000);
     const sourceUrl = buildPollinationsUrl(prompt, seed);
@@ -823,7 +1049,7 @@ async function generateOneMeme() {
     const filename = Date.now() + "-" + seed + ".png";
     const permanentUrl = await uploadToStorage(blob, filename);
 
-    const caption = pick(LOCAL_CAPTIONS);
+    const caption = pickFreshCaption();
     await insertMeme({ image_url: permanentUrl, caption: caption });
     document.getElementById("prompt-input").value = "";
     await refreshGallery();
@@ -836,7 +1062,8 @@ async function generateOneMeme() {
   }
 }
 
-document.getElementById("generate-btn").addEventListener("click", generateOneMeme);
+document.getElementById("generate-absurd-btn").addEventListener("click", (e) => generateOneMeme("absurd", e.currentTarget));
+document.getElementById("generate-cute-btn").addEventListener("click", (e) => generateOneMeme("cute", e.currentTarget));
 document.getElementById("refresh-btn").addEventListener("click", refreshGallery);
 
 const INTERVAL_MS = 10 * 60 * 1000;
