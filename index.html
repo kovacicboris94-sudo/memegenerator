@@ -348,7 +348,7 @@ async function fetchAsBlob(url) {
 
 async function uploadToStorage(blob, filename) {
   const res = await fetch(
-    SUPABASE_URL + "/storage/v1/object/meme-images/" + filename,
+    SUPABASE_URL + "/storage/v1/object/memegenerator/" + filename,
     {
       method: "POST",
       headers: {
@@ -360,7 +360,7 @@ async function uploadToStorage(blob, filename) {
     }
   );
   if (!res.ok) throw new Error("Upload to storage failed: " + res.status);
-  return SUPABASE_URL + "/storage/v1/object/public/meme-images/" + filename;
+  return SUPABASE_URL + "/storage/v1/object/public/memegenerator/" + filename;
 }
 
 function supabaseHeaders() {
