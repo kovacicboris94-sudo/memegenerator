@@ -250,7 +250,32 @@ const ANIMALS = [
   "an alpaca", "a badger", "a lynx", "a pelican", "a wombat",
   "a mole", "a ferret", "an opossum", "a giant tortoise",
   "a hedgehog", "a llama", "a polar bear", "a capybara", "an owl",
-  "a cow", "a raccoon", "a koala", "a camel", "a peacock"
+  "a cow", "a raccoon", "a koala", "a camel", "a peacock",
+  "a chinchilla", "a meerkat", "a flamingo", "a walrus", "a platypus",
+  "a tapir", "an armadillo", "a porcupine", "a chameleon", "an octopus",
+  "a sea lion", "a toucan", "a bison", "an emu", "a hippo",
+  "a moose", "a beaver", "a squid", "a goose", "a turkey",
+  "a frog", "a gecko", "a parrot", "a snail", "a crab",
+  "a jellyfish", "a seahorse", "a manatee", "an axolotl", "a quokka"
+];
+
+const INVENTED_CHARACTERS = [
+  "a small clumsy robot", "a grumpy garden gnome", "a sentient teapot",
+  "a medieval knight in slightly rusty armor", "a confused alien tourist",
+  "a friendly ghost wearing glasses", "a tiny dragon with oversized wings",
+  "a retired superhero in plain clothes", "a wizard who lost his hat",
+  "a sentient cloud with a face", "a vintage tin toy soldier come to life",
+  "a chef made entirely of vegetables", "a snowman wearing sunglasses",
+  "a sentient pile of autumn leaves", "a deep sea diver from the 1920s",
+  "a clockwork mechanical owl", "a pirate captain who is afraid of water",
+  "a sentient suit of furniture", "a tiny minotaur accountant",
+  "a cowboy riding an ostrich instead of a horse", "a sentient stack of pancakes",
+  "a librarian who is actually a giant friendly spider",
+  "a knight made of cardboard boxes", "a sentient vending machine",
+  "a viking who forgot his sword at home", "a mad scientist hamster",
+  "an old sailor with a wooden leg made of chocolate",
+  "a sentient houseplant with tiny legs", "a baker who is secretly a dragon",
+  "a sentient traffic cone with a personality", "a tiny gnome operating heavy machinery"
 ];
 
 const ANIMAL_MIX = [
@@ -258,7 +283,12 @@ const ANIMAL_MIX = [
   "{a1} and {a2} fused together",
   "{a1} dressed up as {a2}",
   "three {a1}s stacked on top of each other like a tower",
-  "{a1} the size of a giant {a2}"
+  "{a1} the size of a giant {a2}",
+  "{a1} riding on the back of {a2}",
+  "{a1} wearing {a2} as a hat",
+  "a tiny {a1} next to a colossal {a2}",
+  "{a1} with the legs of {a2}",
+  "{a1} and {a2} arm wrestling"
 ];
 
 const ABSURD_ACTIONS = [
@@ -273,21 +303,115 @@ const ABSURD_ACTIONS = [
   "piloting a transparent submarine full of balloons",
   "racing on skis down an escalator",
   "playing chess against a mirror",
-  "dressed as a chef baking a cake taller than itself",
   "headbanging on a rock stage made of clouds",
   "balancing on a giant beach ball above a chocolate volcano",
-  "driving a go-kart made of watermelons"
+  "driving a go-kart made of watermelons",
+  "riding a unicycle across a tightrope made of spaghetti",
+  "operating a crane that lifts a giant rubber duck",
+  "wearing a business suit while floating in zero gravity",
+  "fencing with breadsticks against an invisible opponent",
+  "skateboarding down a staircase made of books",
+  "juggling flaming bowling pins underwater",
+  "riding a giant snail through a city in fast motion",
+  "wearing scuba gear in a bathtub full of lemonade",
+  "piloting a tiny biplane through a kitchen",
+  "lifting weights made of giant marshmallows",
+  "doing yoga on top of a moving train",
+  "painting a mural using its own tail as a brush",
+  "robbing a bank using a water gun, comically",
+  "presenting a TED talk to an audience of rubber ducks",
+  "riding a motorcycle made entirely of LEGO bricks",
+  "fishing in a swimming pool full of jello",
+  "wearing roller skates while ice skating on lava lamp wax",
+  "hosting a cooking show in a kitchen that's on fire, calmly",
+  "doing the moonwalk on the surface of the moon",
+  "playing the violin while riding a mechanical bull",
+  "running a lemonade stand on top of a glacier",
+  "parachuting into a giant bowl of cereal",
+  "directing traffic made entirely of shopping carts",
+  "bowling using watermelons as balls and traffic cones as pins",
+  "riding a pogo stick across a tightrope between skyscrapers",
+  "operating a steam engine made of teapots",
+  "wearing a tuxedo while mud wrestling",
+  "playing ping pong against its own reflection",
+  "delivering pizza via hot air balloon during a storm",
+  "competing in a synchronized swimming routine alone",
+  "driving a tractor through a ball pit",
+  "performing a magic trick that goes hilariously wrong",
+  "riding an escalator the wrong way in a panic",
+  "hosting a late night talk show for other animals",
+  "skiing down a sand dune in full snow gear",
+  "playing drums made of giant gummy bears",
+  "trying to parallel park a hot air balloon",
+  "competing in an arm wrestling match with a robot",
+  "flying a kite shaped like a pizza slice during a hurricane",
+  "operating a one-animal marching band",
+  "riding a shopping cart down a hill at full speed",
+  "doing a backflip off a diving board into a pool of soup",
+  "wearing a graduation cap while herding cats, literally",
+  "trying to assemble flat-pack furniture upside down",
+  "playing a grand piano floating in the ocean",
+  "riding an old-fashioned penny-farthing bicycle through a supermarket",
+  "competing in a hot dog eating contest against a much bigger animal",
+  "stuck halfway through a doggy door, comically oversized",
+  "wearing 3D glasses while watching a black and white film",
+  "trying to walk a dozen leashed cats at once",
+  "attempting karaoke in front of an empty stadium",
+  "balancing a stack of pancakes on its nose while walking a tightrope",
+  "piloting a rowboat across a parking lot during a flood",
+  "wearing oven mitts while trying to play a video game",
+  "riding a mechanical horse at full speed in a grocery store"
 ];
 
 const VISUAL_STYLES = [
-  "hyperrealistic photography, soft natural light",
-  "90s cartoon style, saturated colors",
-  "3D Pixar-style render, soft lighting",
-  "classic oil painting but with an absurd subject",
-  "claymation style",
-  "macro photography, shallow depth of field",
-  "flat vector illustration, pastel palette"
+  "hyperrealistic editorial photography, 85mm lens, soft natural light",
+  "90s Saturday morning cartoon style, bold outlines, saturated colors",
+  "3D Pixar-style render, cinematic soft lighting, subsurface scattering",
+  "classic Renaissance oil painting technique, dramatic chiaroscuro lighting",
+  "stop-motion claymation, visible fingerprints, soft studio lighting",
+  "macro photography, shallow depth of field, golden hour light",
+  "flat vector illustration, pastel palette, clean geometric shapes",
+  "vintage comic book style, halftone dots, bold ink linework",
+  "loose watercolor painting, wet-on-wet technique, soft edges",
+  "stop-motion puppet style, felt and fabric textures",
+  "retro 1980s airbrush poster art, neon gradient palette",
+  "low-poly 3D render, flat shading, isometric angle",
+  "studio product photography, softbox lighting, seamless backdrop",
+  "art nouveau illustration style, ornate linework, muted gold tones",
+  "tilt-shift photography, miniature effect, high saturation",
+  "double exposure photography, surreal composite, moody tones",
+  "ukiyo-e woodblock print style, flat color planes, bold outlines",
+  "cinematic film still, anamorphic lens flare, teal and orange grading",
+  "vintage National Geographic documentary photography style",
+  "charcoal sketch on textured paper, soft smudged shading"
 ];
+
+const RECENT_HISTORY_KEY = "recent-elements";
+const RECENT_LIMIT = 12;
+
+function getRecentlyUsed() {
+  try {
+    return JSON.parse(localStorage.getItem(RECENT_HISTORY_KEY) || "[]");
+  } catch (e) {
+    return [];
+  }
+}
+
+function rememberUsed(items) {
+  let recent = getRecentlyUsed();
+  recent = recent.concat(items);
+  if (recent.length > RECENT_LIMIT) {
+    recent = recent.slice(recent.length - RECENT_LIMIT);
+  }
+  localStorage.setItem(RECENT_HISTORY_KEY, JSON.stringify(recent));
+}
+
+function pickFresh(arr) {
+  const recent = getRecentlyUsed();
+  const available = arr.filter((item) => !recent.includes(item));
+  const pool = available.length > 0 ? available : arr;
+  return pool[Math.floor(Math.random() * pool.length)];
+}
 
 const LOCAL_CAPTIONS = [
   "Just a regular Tuesday.",
@@ -320,19 +444,25 @@ function generateIdea(customSubject) {
   let subject;
   if (customSubject && customSubject.trim()) {
     subject = customSubject.trim();
-  } else if (Math.random() < 0.5) {
-    const [a1, a2] = pickTwoDistinct(ANIMALS);
-    subject = pick(ANIMAL_MIX).replace("{a1}", a1).replace("{a2}", a2);
   } else {
-    subject = pick(ANIMALS);
+    const roll = Math.random();
+    if (roll < 0.35) {
+      const [a1, a2] = pickTwoDistinct(ANIMALS);
+      subject = pickFresh(ANIMAL_MIX).replace("{a1}", a1).replace("{a2}", a2);
+    } else if (roll < 0.7) {
+      subject = pickFresh(ANIMALS);
+    } else {
+      subject = pickFresh(INVENTED_CHARACTERS);
+    }
   }
-  const action = pick(ABSURD_ACTIONS);
-  const style = pick(VISUAL_STYLES);
+  const action = pickFresh(ABSURD_ACTIONS);
+  const style = pickFresh(VISUAL_STYLES);
+  rememberUsed([subject, action, style]);
   return { description: subject + " " + action, style };
 }
 
 function buildPrompt(idea) {
-  return idea.description + ", " + idea.style + ", absurd and comedic composition, high quality, detailed, no text or writing in the image";
+  return idea.description + ", " + idea.style + ", absurd and comedic composition, professional quality, sharp focus, highly detailed, well-balanced composition, no text or writing or watermark in the image";
 }
 
 function buildPollinationsUrl(prompt, seed) {
